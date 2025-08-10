@@ -1,6 +1,6 @@
 import pandas as pd
 
-def demographic_data:
+def demographic_data():
 
 	df = pd.read_csv('/Users/yashkalathiya/Downloads/Yash/Data Analyst Portfolio Projects/census+income/Census.csv')
 	df.columns = ['age','workclass','fnlwgt','education','education-num','marital-status','occupation','relationship','race','sex','capital-gain','capital-loss','hours-per-week','native-country','salary']
@@ -51,17 +51,19 @@ def demographic_data:
 	df2 = df.copy()
 	highest_earning_country = None
 	highest_earning_country_percentage = 0
+
 	for country, data in df2.groupby('native-country'):
-    percentage = (df2['salary'] == ' >50K').sum() / df2['salary'].count()
-    if highest_earning_country_percentage < percentage :
-        highest_earning_country_percentage = percentage
-        highest_earning_country = country
+		percentage = (df2['salary'] == ' >50K').sum() / df2['salary'].count()
+		if highest_earning_country_percentage < percentage :
+			highest_earning_country_percentage = percentage
+			highest_earning_country = country
 
 	highest_earning_country_percentage = round(highest_earning_country_percentage,1)
 	print(highest_earning_country_percentage)
 
 	# Identify the most popular occupation for those who earn >50K in India.
 	topOccupationInIndia = df2[(df2['salary'] == ' >50K') & (df2['native-country'] == ' India')]['occupation'].value_counts().keys()[0]
+	print(topOccupationInIndia)
 
 
 
